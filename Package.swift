@@ -1,6 +1,6 @@
 import PackageDescription
 
 let package = Package(
-    name: "s4",
+    name: "S4",
     dependencies: []
 )
