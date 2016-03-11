@@ -8,6 +8,7 @@ public enum HTTPStatus {
     case Created
     case Accepted
     ...
+    case Raw(statusCode: Int, reasonPhrase: String)
 }
 ```
 
