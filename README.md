@@ -6,7 +6,7 @@ It is Swift X's mission to create concise, clear, and well-documented standards 
 
 Swift X strives to maintain the following core beliefs for all of its standards:
 - Inclusive
-    - Swift X standards should be unbiased and compatible with all Swift projects.
+    - Swift X standards should be unbiased and easy to adopt for all Swift projects.
 - Community
     - Open Source and open to comments, criticisms, and pull requests.
 - Performant
