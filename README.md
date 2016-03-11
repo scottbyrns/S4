@@ -248,7 +248,7 @@ public enum HTTPMethod {
 
 ### Motivation
 
-Having `HTTPMethod` as an enum with a `Raw` case makes it convenient and flexible at the same time.
+Having `HTTPMethod` as an enum with a `Raw` case makes it convenient and flexible at the same time. Also protocols can't be used as a key to a dictionary and this could be common.
 
 ## URI
 
