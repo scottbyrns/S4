@@ -6,7 +6,9 @@ It is Swift X's mission to create concise, clear, and well-documented standards 
 
 Swift X strives to maintain the following core beliefs for all of its standards:
 - Inclusive
-    - Our purpose is to facilitate cross-project communication.
+    - Swift X standards should be unbiased and compatible with all Swift projects. 
+- Community
+    - Open Source and open to comments, criticisms, and pull requests. 
 - Performant
     - Conforming to Swift X standards should have the minimum possible impact on performance possible.
 - Minimum viable requirements
