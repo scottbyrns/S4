@@ -22,7 +22,10 @@ public protocol StreamServer {
 
 public typealias HTTPVersion = (major: Int, minor: Int)
 
-public typealias HTTPHeader = (name: String, value: String)
+public struct HTTPHeader {
+    public let name: String
+    public let value: String
+}
 
 public typealias HTTPHeaders = [HTTPHeader]
 
@@ -178,10 +181,13 @@ public struct URI {
     public var fragment: String?
 }
 
-public protocol HTTPRequest: HTTPMessage {
-    var method: HTTPMethod { get }
-    var uri: URI { get }
-    var upgrade: ((response: HTTPResponse, stream: Stream) throws -> Void)? { get }
+public struct HTTPRequest: HTTPMessage {
+    public var method: HTTPMethod
+    public var uri: URI
+    public var version: HTTPVersion
+    public var headers: HTTPHeaders
+    public var body: HTTPBody
+    public var storage: Storage = [:]
 }
 
 public protocol HTTPRequestParser {
@@ -258,9 +264,12 @@ public enum HTTPStatus {
     case Raw(statusCode: Int, reasonPhrase: String)
 }
 
-public protocol HTTPResponse: HTTPMessage {
-    var status: HTTPStatus { get }
-    var upgrade: ((request: HTTPRequest, stream: Stream) throws -> Void)? { get }
+public struct HTTPResponse: HTTPMessage {
+    public var version: HTTPVersion
+    public var status: HTTPStatus
+    public var headers: HTTPHeaders
+    public var body: HTTPBody
+    public var storage: Storage = [:]
 }
 
 public protocol HTTPResponseParser {
@@ -301,4 +310,5 @@ public protocol HTTPRoute: HTTPResponder {
 public protocol HTTPRouter: HTTPResponder {
     var routes: [HTTPRoute] { get }
     var fallback: HTTPResponder { get }
+    func match(request: HTTPRequest) -> HTTPRoute?
 }
