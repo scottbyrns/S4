@@ -26,7 +26,7 @@ public struct Data {
 
 ### Motivation
 
-Having a type for binary data makes low level operations a lot easier. Specially when interfacing with `C`.
+Binary data types facilitate standardization of low level operations, especially when interfacing with C API.
 
 ```swift
 let bytesWritten = data.withUnsafeBufferPointer {
