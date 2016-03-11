@@ -1,30 +1,9 @@
-# S4 - Server Side Swift Standards
-
-## Byte
-
-The `Byte` type represents a byte.
-
-```swift
 public typealias Byte = UInt8
-```
 
-## Data
-
-The `Data` type represents binary data as a collection of bytes.
-
-> An alternative name could be `Buffer`.
-
-```swift
 public struct Data {
     public var bytes: [Byte]
 }
-```
 
-## Stream
-
-The `Stream` protocol represents a bi-directional stream of binary data.
-
-```swift
 public protocol Stream {
     var closed: Bool { get }
     func close() -> Bool
@@ -32,89 +11,35 @@ public protocol Stream {
     func send(data: Data) throws
     func flush() throws
 }
-```
 
-## StreamClient
-
-The `StreamClient` protocol represents a type that can make a connection and return a stream of binary data.
-
-```swift
 public protocol StreamClient {
     func connect() throws -> Stream
 }
-```
 
-## StreamServer
-
-The `StreamServer` protocol represents a type that can accept a connection and return a stream of binary data.
-
-```swift
 public protocol StreamServer {
     func accept() throws -> Stream
 }
-```
 
-## HTTPVersion
-
-The `HTTPVersion` type represents an HTTP version.
-
-```swift
 public typealias HTTPVersion = (major: Int, minor: Int)
-```
 
-## HTTPHeader
-
-The `HTTPHeader` type represents an HTTP header value.
-
-```swift
 public typealias HTTPHeader = (name: String, value: String)
-```
 
-## HTTPHeaders
-
-The `HTTPHeaders` type represents HTTP headers.
-
-```swift
 public typealias HTTPHeaders = [HTTPHeader]
-```
 
-## HTTPBody
-
-The `HTTPBody` type represents an HTTP body in buffer or stream form.
-
-```swift
 public enum HTTPBody {
     case BufferBody(Data)
     case StreamBody(Stream)
 }
-```
 
-## Storage
-
-The `Storage` type represents arbitrary data that can be passed between middleware and a responder in a chain.
-
-```swift
 public typealias Storage = [String: Any]
-```
 
-## HTTPMessage
-
-The `HTTPMessage` protocol represents properties common to HTTP messages (request or response).
-
-```swift
 public protocol HTTPMessage {
     var version: HTTPVersion { get set }
     var headers: HTTPHeaders { get set }
     var body: HTTPBody { get set }
     var storage: Storage { get set }
 }
-```
 
-## HTTPMethod
-
-The `HTTPMethod` type represents an HTTP method.
-
-```swift
 public enum HTTPMethod {
     case Delete
     case Get
@@ -151,13 +76,93 @@ public enum HTTPMethod {
     case Unlink
     case Raw(method: String)
 }
-```
 
-## URI
+extension HTTPMethod: Hashable {
+    public var hashValue: Int {
+        switch self {
+        case .Delete:      return 0
+        case .Get:         return 1
+        case .Head:        return 2
+        case .Post:        return 3
+        case .Put:         return 4
+        case .Connect:     return 5
+        case .Options:     return 6
+        case .Trace:       return 7
+        case .Copy:        return 8
+        case .Lock:        return 9
+        case .MkCol:       return 10
+        case .Move:        return 11
+        case .PropFind:    return 12
+        case .PropPatch:   return 13
+        case .Search:      return 14
+        case .Unlock:      return 15
+        case .Bind:        return 16
+        case .Rebind:      return 17
+        case .Unbind:      return 18
+        case .ACL:         return 19
+        case .Report:      return 20
+        case .MkActicity:  return 21
+        case .Checkout:    return 22
+        case .Merge:       return 23
+        case .MSearch:     return 24
+        case .Notify:      return 25
+        case .Subscribe:   return 26
+        case .Unsubscribe: return 27
+        case .Patch:       return 28
+        case .Purge:       return 29
+        case .MkCalendar:  return 30
+        case .Link:        return 31
+        case .Unlink:      return 32
+        case .Raw(let method): return 33 + method.hashValue
+        }
+    }
+}
 
-The `URI` type represents an URI.
+public func ==(lhs: HTTPMethod, rhs: HTTPMethod) -> Bool {
+    return lhs.hashValue == rhs.hashValue
+}
 
-```swift
+extension HTTPMethod: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .Delete:      return "DELETE"
+        case .Get:         return "GET"
+        case .Head:        return "HEAD"
+        case .Post:        return "POST"
+        case .Put:         return "PUT"
+        case .Connect:     return "CONNECT"
+        case .Options:     return "OPTIONS"
+        case .Trace:       return "TRACE"
+        case .Copy:        return "COPY"
+        case .Lock:        return "LOCK"
+        case .MkCol:       return "MKCOL"
+        case .Move:        return "MOVE"
+        case .PropFind:    return "PROPFIND"
+        case .PropPatch:   return "PROPPATCH"
+        case .Search:      return "SEARCH"
+        case .Unlock:      return "UNLOCK"
+        case .Bind:        return "BIND"
+        case .Rebind:      return "REBIND"
+        case .Unbind:      return "UNBIND"
+        case .ACL:         return "ACL"
+        case .Report:      return "REPORT"
+        case .MkActicity:  return "MKACTIVITY"
+        case .Checkout:    return "CHECKOUT"
+        case .Merge:       return "MERGE"
+        case .MSearch:     return "MSEARCH"
+        case .Notify:      return "NOTIFY"
+        case .Subscribe:   return "SUBSCRIBE"
+        case .Unsubscribe: return "UNSUBSCRIBE"
+        case .Patch:       return "PATCH"
+        case .Purge:       return "PURGE"
+        case .MkCalendar:  return "MKCALENDAR"
+        case .Link:        return "LINK"
+        case .Unlink:      return "UNLINK"
+        default:           return "UNKNOWN"
+        }
+    }
+}
+
 public struct URI {
     public struct UserInfo {
         public var username: String
@@ -172,45 +177,21 @@ public struct URI {
     public var query: [String: String]
     public var fragment: String?
 }
-```
 
-## HTTPRequest
-
-The `HTTPRequest` protocol represents an HTTP request.
-
-```swift
 public protocol HTTPRequest: HTTPMessage {
     var method: HTTPMethod { get }
     var uri: URI { get }
     var upgrade: ((response: HTTPResponse, stream: Stream) throws -> Void)? { get }
 }
-```
 
-## HTTPRequestParser
-
-The `HTTPRequestParser` protocol represents a type that can parse an HTTP request.
-
-```swift
 public protocol HTTPRequestParser {
     func parse(data: Data) throws -> HTTPRequest?
 }
-```
 
-## HTTPRequestSerializer
-
-The `HTTPRequestSerializer` protocol represents a type that can serialize HTTP requests.
-
-```swift
 public protocol HTTPRequestSerializer {
     func serialize(request: HTTPRequest, @noescape send: Data throws -> Void) throws
 }
-```
 
-## HTTPStatus
-
-The `HTTPStatus` protocol represents an HTTP status.
-
-```swift
 public enum HTTPStatus {
     case Continue
     case SwitchingProtocols
@@ -276,71 +257,28 @@ public enum HTTPStatus {
 
     case Raw(statusCode: Int, reasonPhrase: String)
 }
-```
 
-## HTTPResponse
-
-The `HTTPResponse` protocol represents an HTTP response.
-
-```swift
 public protocol HTTPResponse: HTTPMessage {
     var status: HTTPStatus { get }
     var upgrade: ((request: HTTPRequest, stream: Stream) throws -> Void)? { get }
 }
-```
 
-## HTTPResponseParser
-
-The `HTTPResponseParser` protocol represents a type that can parse an HTTP response.
-
-```swift
 public protocol HTTPResponseParser {
     func parse(data: Data) throws -> HTTPResponse?
 }
-```
 
-## HTTPResponseSerializer
-
-The `HTTPResponseSerializer` protocol represents a type that can serialize HTTP responses.
-
-```swift
 public protocol HTTPResponseSerializer {
     func serialize(response: HTTPResponse, @noescape send: Data throws -> Void) throws
 }
-```
 
-## HTTPResponder
-
-The `HTTPResponder` protocol represents a type that can respond to HTTP requests.
-
-```swift
 public protocol HTTPResponder {
     func respond(request: HTTPRequest) throws -> HTTPResponse
 }
-```
 
-## HTTPMiddleware
-
-The `HTTPMiddleware` protocol represents a type that responds to an HTTP request optionally forwarding the request to the chain.
-
-
-```swift
 public protocol HTTPMiddleware {
     func respond(request: HTTPRequest, chain: HTTPResponder) throws -> HTTPResponse
 }
-```
 
-## HTTPServer
-
-The `HTTPServer` protocol represents a type that serves HTTP requests by:
-
-- Accepting a connection
-- Parsing the HTTP request
-- Applying middleware to the responder
-- Responding the HTTP request
-- Serializing the HTTP response
-
-```swift
 public protocol HTTPServer {
     var server: StreamServer { get }
     var parser: HTTPRequestParser { get }
@@ -348,47 +286,23 @@ public protocol HTTPServer {
     var responder: HTTPResponder { get }
     var serializer: HTTPResponseSerializer  { get }
 }
-```
 
-## HTTPClient
-
-The `HTTPClient` protocol represents a type that sends HTTP requests by:
-
-- Making a connection
-- Serializing the HTTP request
-- Applying middleware to itself
-- Parsing the HTTP response
-
-```swift
 public protocol HTTPClient: HTTPResponder {
     var client: StreamClient { get }
     var serializer: HTTPRequestSerializer { get }
     var middleware: [HTTPMiddleware] { get }
     var parser: HTTPResponseParser { get }
 }
-```
 
-## HTTPRoute
-
-The `HTTPRoute` protocol represents an HTTP route.
-
-```swift
 public protocol HTTPRoute: HTTPResponder {
     var path: String { get }
     var actions: [HTTPMethod: HTTPResponder] { get }
     var fallback: HTTPResponder { get }
 }
-```
 
-## HTTPRouter
-
-The `HTTPRouter` protocol represents an HTTP router.
-
-```swift
 public protocol HTTPRouter: HTTPResponder {
     var middleware: [HTTPMiddleware] { get }
     var routes: [HTTPRoute] { get }
     var fallback: HTTPResponder { get }
     func match(request: HTTPRequest) -> HTTPRoute?
 }
-```
