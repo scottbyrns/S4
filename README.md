@@ -8,6 +8,10 @@ The `Byte` type represents a byte.
 public typealias Byte = UInt8
 ```
 
+### Motivation
+
+`Byte` is clearer than `UInt8` in the context of binary data.
+
 ## Data
 
 The `Data` type represents binary data as a collection of bytes.
@@ -17,6 +21,43 @@ The `Data` type represents binary data as a collection of bytes.
 ```swift
 public struct Data {
     public var bytes: [Byte]
+}
+```
+
+### Motivation
+
+Having a type for binary data makes low level operations a lot easier. Specially when interfacing with `C`.
+
+```swift
+let bytesWritten = data.withUnsafeBufferPointer {
+    write(fd, $0.baseAddress, $0.count)
+}
+```
+
+`Data` could be simply a typealias:
+
+```swift
+typealias Data = [Byte]
+```
+
+But that wouldn't allow it to conform to protocols. Wrapping `[Byte]` in a `struct` gives much more freedom. 
+
+```swift
+extension Data: CustomStringConvertible {
+    public var description: String {
+        return (try? String(data: self)) ?? hexDescription
+    }
+}
+```
+
+### Alternative
+
+An alternative would be to store the binary data using raw pointes.
+
+```swift
+public struct Data {
+    var bytes: UnsafeMutablePointer<Void>
+    var length: Int
 }
 ```
 
@@ -34,9 +75,26 @@ public protocol Stream {
 }
 ```
 
+### Motivation
+
+With an abstraction for a stream we can avoid tight coupling and get the advantage of composition. One could, for example, wrap a raw `TCP` stream in an `SSL` stream that encrypts/decrypts the binary data coming from the raw stream.
+
+```swift
+public final class SSLStream: Stream {
+    private let context: SSLContext
+    private let rawStream: Stream
+
+	public init(context: SSLContext, rawStream: Stream) throws {
+		...
+	}
+}
+```
+
+The API consuming the stream doesn't need to know how the binary data is created. It only needs the binary data.
+
 ## StreamClient
 
-The `StreamClient` protocol represents a type that can make a connection and return a stream of binary data.
+The `StreamClient` protocol represents a client that can start a connection and return a stream of binary data representing that connection.
 
 ```swift
 public protocol StreamClient {
@@ -44,15 +102,23 @@ public protocol StreamClient {
 }
 ```
 
+### Motivation
+
+Having an abstraction for a client reduces tight coupling and allows the consumer API to focus solely on the binary data being transmitted through the stream.
+
 ## StreamServer
 
-The `StreamServer` protocol represents a type that can accept a connection and return a stream of binary data.
+The `StreamServer` protocol represents a server that can accept a connection and return a stream of binary data representing that connection.
 
 ```swift
 public protocol StreamServer {
     func accept() throws -> Stream
 }
 ```
+
+### Motivation
+
+Having an abstraction for a server reduces tight coupling and allows the consumer API to focus solely on the binary data being transmitted through the stream.
 
 ## HTTPVersion
 
@@ -62,13 +128,24 @@ The `HTTPVersion` type represents an HTTP version.
 public typealias HTTPVersion = (major: Int, minor: Int)
 ```
 
+### Motivation
+
+HTTP version is needed to handle protocol differences properly.
+
 ## HTTPHeader
 
-The `HTTPHeader` type represents an HTTP header value.
+The `HTTPHeader` type represents an HTTP header.
 
 ```swift
-public typealias HTTPHeader = (name: String, value: String)
+public struct HTTPHeader {
+    let name: String
+    let value: String
+}
 ```
+
+### Motivation
+
+Having `HTTPHeader` as a `struct` allows it to conform to protocols.
 
 ## HTTPHeaders
 
@@ -77,6 +154,10 @@ The `HTTPHeaders` type represents HTTP headers.
 ```swift
 public typealias HTTPHeaders = [HTTPHeader]
 ```
+
+### Motivation
+
+Unfortunately the HTTP protocol allows duplicate headers (see `Set-Cookie`). So we have to make it an array instead of a dictionary.
 
 ## HTTPBody
 
@@ -89,6 +170,10 @@ public enum HTTPBody {
 }
 ```
 
+### Motivation
+
+Buffer bodies are best suited for HTTP messages with `Content-Length` headers. Stream bodies are best suited for HTTP messages with `Transfer-Encoding` set to `chunked`.
+
 ## Storage
 
 The `Storage` type represents arbitrary data that can be passed between middleware and a responder in a chain.
@@ -97,9 +182,13 @@ The `Storage` type represents arbitrary data that can be passed between middlewa
 public typealias Storage = [String: Any]
 ```
 
+### Motivation
+
+Having a storage in the HTTP messages makes middleware much more useful since they can pass forward parsed/serialized content, session information or just about any custom data.
+
 ## HTTPMessage
 
-The `HTTPMessage` protocol represents properties common to HTTP messages (request or response).
+The `HTTPMessage` protocol represents properties common to HTTP messages (request/response).
 
 ```swift
 public protocol HTTPMessage {
@@ -109,6 +198,10 @@ public protocol HTTPMessage {
     var storage: Storage { get set }
 }
 ```
+
+### Motivation
+
+Having the `HTTPMessage` protocol makes adding computed properties common to requests and responses more convenient. It removes code duplication.
 
 ## HTTPMethod
 
@@ -153,6 +246,10 @@ public enum HTTPMethod {
 }
 ```
 
+### Motivation
+
+Having `HTTPMethod` as an enum with a `Raw` case makes it convenient and flexible at the same time.
+
 ## URI
 
 The `URI` type represents an URI.
@@ -174,21 +271,32 @@ public struct URI {
 }
 ```
 
+### Motivation
+
+Having `URI` as a `struct` allows it to conform to protocols in extensions.
+
 ## HTTPRequest
 
-The `HTTPRequest` protocol represents an HTTP request.
+The `HTTPRequest` type represents an HTTP request.
 
 ```swift
-public protocol HTTPRequest: HTTPMessage {
-    var method: HTTPMethod { get }
-    var uri: URI { get }
-    var upgrade: ((response: HTTPResponse, stream: Stream) throws -> Void)? { get }
+public struct HTTPRequest: HTTPMessage {
+    public var method: HTTPMethod
+    public var uri: URI
+    public var version: HTTPVersion
+    public var headers: HTTPHeaders
+    public var body: HTTPBody
+    public var storage: Storage = [:]
 }
 ```
 
+### Motivation
+
+Having `HTTPRequest` as a `struct` allows it to conform to protocols in extensions.
+
 ## HTTPRequestParser
 
-The `HTTPRequestParser` protocol represents a type that can parse an HTTP request.
+The `HTTPRequestParser` protocol represents a type that can parse an HTTP request from binary data.
 
 ```swift
 public protocol HTTPRequestParser {
@@ -198,7 +306,7 @@ public protocol HTTPRequestParser {
 
 ## HTTPRequestSerializer
 
-The `HTTPRequestSerializer` protocol represents a type that can serialize HTTP requests.
+The `HTTPRequestSerializer` protocol represents a type that can serialize HTTP requests to binary data.
 
 ```swift
 public protocol HTTPRequestSerializer {
@@ -278,16 +386,27 @@ public enum HTTPStatus {
 }
 ```
 
+### Motivation
+
+Having `HTTPStatus` as an enum with a `Raw` case makes it convenient and flexible at the same time.
+
 ## HTTPResponse
 
-The `HTTPResponse` protocol represents an HTTP response.
+The `HTTPResponse` type represents an HTTP response.
 
 ```swift
-public protocol HTTPResponse: HTTPMessage {
-    var status: HTTPStatus { get }
-    var upgrade: ((request: HTTPRequest, stream: Stream) throws -> Void)? { get }
+public struct HTTPResponse: HTTPMessage {
+    public var version: HTTPVersion
+    public var status: HTTPStatus
+    public var headers: HTTPHeaders
+    public var body: HTTPBody
+    public var storage: Storage = [:]
 }
 ```
+
+### Motivation
+
+Having `HTTPResponse` as a `struct` allows it to conform to protocols in extensions.
 
 ## HTTPResponseParser
 
@@ -319,6 +438,10 @@ public protocol HTTPResponder {
 }
 ```
 
+### Motivation
+
+This is the most important protocol in an HTTP context. The responder is the base for higher-level abstractions like routers and middlewares.
+
 ## HTTPMiddleware
 
 The `HTTPMiddleware` protocol represents a type that responds to an HTTP request optionally forwarding the request to the chain.
@@ -329,6 +452,10 @@ public protocol HTTPMiddleware {
     func respond(request: HTTPRequest, chain: HTTPResponder) throws -> HTTPResponse
 }
 ```
+
+### Motivation
+
+Middleware drastically reduces boilerplate and allows code reuse. This degisn allows middleware to be applied on the server and on the client, reducing boilerplate even further.
 
 ## HTTPClient
 
@@ -376,6 +503,21 @@ public protocol HTTPRoute: HTTPResponder {
 }
 ```
 
+### Motivation
+
+This design makes the router's job easier. The router only needs to match the request's `path` to a route's `path`. The route itself will know if it has a responder for that method. If it doesn't, it responds with the fallback which could default to `MethodNotAllowed`.
+
+This could be done with a protocol extension implementing `respond` from the `HTTPResponder` protocol.
+
+```swift
+extension HTTPRoute {
+    public func respond(request: HTTPRequest) throws -> HTTPResponse {
+        let action = actions[request.method] ?? fallback
+        return try action.respond(request)
+    }
+}
+```
+
 ## HTTPRouter
 
 The `HTTPRouter` protocol represents an HTTP router.
@@ -384,5 +526,19 @@ The `HTTPRouter` protocol represents an HTTP router.
 public protocol HTTPRouter: HTTPResponder {
     var routes: [HTTPRoute] { get }
     var fallback: HTTPResponder { get }
+    func match(request: HTTPRequest) -> HTTPRoute?
+}
+```
+
+### Motivation
+
+`HTTPRouter` being an `HTTPResponder` the `respond` function could simply be:
+
+```swift
+extension HTTPRouter {
+    public func respond(request: HTTPRequest) throws -> HTTPResponse {
+        let responder = match(request) ?? fallback
+        return try responder.respond(request)
+    }
 }
 ```
