@@ -336,7 +336,6 @@ The `HTTPServer` protocol represents a type that serves HTTP requests by:
 
 - Accepting a connection
 - Parsing the HTTP request
-- Applying middleware to the responder
 - Responding the HTTP request
 - Serializing the HTTP response
 
@@ -344,7 +343,6 @@ The `HTTPServer` protocol represents a type that serves HTTP requests by:
 public protocol HTTPServer {
     var server: StreamServer { get }
     var parser: HTTPRequestParser { get }
-    var middleware: [HTTPMiddleware] { get }
     var responder: HTTPResponder { get }
     var serializer: HTTPResponseSerializer  { get }
 }
@@ -356,14 +354,12 @@ The `HTTPClient` protocol represents a type that sends HTTP requests by:
 
 - Making a connection
 - Serializing the HTTP request
-- Applying middleware to itself
 - Parsing the HTTP response
 
 ```swift
 public protocol HTTPClient: HTTPResponder {
     var client: StreamClient { get }
     var serializer: HTTPRequestSerializer { get }
-    var middleware: [HTTPMiddleware] { get }
     var parser: HTTPResponseParser { get }
 }
 ```
@@ -386,7 +382,6 @@ The `HTTPRouter` protocol represents an HTTP router.
 
 ```swift
 public protocol HTTPRouter: HTTPResponder {
-    var middleware: [HTTPMiddleware] { get }
     var routes: [HTTPRoute] { get }
     var fallback: HTTPResponder { get }
     func match(request: HTTPRequest) -> HTTPRoute?

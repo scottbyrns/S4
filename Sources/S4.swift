@@ -282,7 +282,6 @@ public protocol HTTPMiddleware {
 public protocol HTTPServer {
     var server: StreamServer { get }
     var parser: HTTPRequestParser { get }
-    var middleware: [HTTPMiddleware] { get }
     var responder: HTTPResponder { get }
     var serializer: HTTPResponseSerializer  { get }
 }
@@ -290,7 +289,6 @@ public protocol HTTPServer {
 public protocol HTTPClient: HTTPResponder {
     var client: StreamClient { get }
     var serializer: HTTPRequestSerializer { get }
-    var middleware: [HTTPMiddleware] { get }
     var parser: HTTPResponseParser { get }
 }
 
@@ -301,7 +299,6 @@ public protocol HTTPRoute: HTTPResponder {
 }
 
 public protocol HTTPRouter: HTTPResponder {
-    var middleware: [HTTPMiddleware] { get }
     var routes: [HTTPRoute] { get }
     var fallback: HTTPResponder { get }
     func match(request: HTTPRequest) -> HTTPRoute?
