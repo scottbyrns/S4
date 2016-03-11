@@ -11,6 +11,8 @@ Swift X strives to maintain the following core beliefs for all of its standards:
     - Conforming to Swift X standards should have the minimum possible impact on performance possible.
 - Minimum viable requirements
     - Only the code that is absolutely necessary for cross-project compatibility will be included. 
+- Best practices
+    - Swift X should abide by any widely accepted best practices in the Swift community, like naming conventions. 
 
 ## Byte
 
