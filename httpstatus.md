@@ -13,4 +13,4 @@ public enum HTTPStatus {
 
 ### Motivation
 
-Having `HTTPStatus` as an enum with a `Raw` case makes it convenient and flexible at the same time.
+Having `HTTPStatus` as an enum with a `Raw` case ensures flexible and accurate communication of HTTP Method between projects. Without an enum, string matching issues could cause inconsistencies.
