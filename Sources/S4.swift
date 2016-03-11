@@ -279,17 +279,17 @@ public protocol HTTPMiddleware {
     func respond(request: HTTPRequest, chain: HTTPResponder) throws -> HTTPResponse
 }
 
+public protocol HTTPClient: HTTPResponder {
+    var client: StreamClient { get }
+    var serializer: HTTPRequestSerializer { get }
+    var parser: HTTPResponseParser { get }
+}
+
 public protocol HTTPServer {
     var server: StreamServer { get }
     var parser: HTTPRequestParser { get }
     var responder: HTTPResponder { get }
     var serializer: HTTPResponseSerializer  { get }
-}
-
-public protocol HTTPClient: HTTPResponder {
-    var client: StreamClient { get }
-    var serializer: HTTPRequestSerializer { get }
-    var parser: HTTPResponseParser { get }
 }
 
 public protocol HTTPRoute: HTTPResponder {

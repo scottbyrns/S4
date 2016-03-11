@@ -330,6 +330,22 @@ public protocol HTTPMiddleware {
 }
 ```
 
+## HTTPClient
+
+The `HTTPClient` protocol represents a type that sends HTTP requests by:
+
+- Making a connection
+- Serializing the HTTP request
+- Parsing the HTTP response
+
+```swift
+public protocol HTTPClient: HTTPResponder {
+    var client: StreamClient { get }
+    var serializer: HTTPRequestSerializer { get }
+    var parser: HTTPResponseParser { get }
+}
+```
+
 ## HTTPServer
 
 The `HTTPServer` protocol represents a type that serves HTTP requests by:
@@ -345,22 +361,6 @@ public protocol HTTPServer {
     var parser: HTTPRequestParser { get }
     var responder: HTTPResponder { get }
     var serializer: HTTPResponseSerializer  { get }
-}
-```
-
-## HTTPClient
-
-The `HTTPClient` protocol represents a type that sends HTTP requests by:
-
-- Making a connection
-- Serializing the HTTP request
-- Parsing the HTTP response
-
-```swift
-public protocol HTTPClient: HTTPResponder {
-    var client: StreamClient { get }
-    var serializer: HTTPRequestSerializer { get }
-    var parser: HTTPResponseParser { get }
 }
 ```
 
