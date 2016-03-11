@@ -1,5 +1,17 @@
 # S4 - Server Side Swift Standards
 
+## Mission
+
+It is Swift X's mission to create concise, clear, and well-documented standards to which all Swift projects can conform. By standarzing certain common functionalities, Swift X allows radically improved cross-project compatibility. More compatibility means more collaboration which benefits each individual project as well as the Swift community as a whole.
+
+Swift X strives to maintain the following core beleifs for all of its standards:
+- Unonpinionated
+    - Swift X does not want to provide any opinion as to how your project should be structured or how it should function. Its only purpose is to facilitate cross-project communication.
+- Performant
+    - Conforming to Swift X standards should have the minimum possible impact on performance possible.
+- Minimum viable requirements
+    - Only the data structures and protocols that are absolutely necessary for cross-project compatibility will be included. 
+
 ## Byte
 
 The `Byte` type represents a byte.
