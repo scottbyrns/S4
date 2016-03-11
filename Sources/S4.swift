@@ -301,5 +301,4 @@ public protocol HTTPRoute: HTTPResponder {
 public protocol HTTPRouter: HTTPResponder {
     var routes: [HTTPRoute] { get }
     var fallback: HTTPResponder { get }
-    func match(request: HTTPRequest) -> HTTPRoute?
 }

@@ -384,6 +384,5 @@ The `HTTPRouter` protocol represents an HTTP router.
 public protocol HTTPRouter: HTTPResponder {
     var routes: [HTTPRoute] { get }
     var fallback: HTTPResponder { get }
-    func match(request: HTTPRequest) -> HTTPRoute?
 }
 ```
