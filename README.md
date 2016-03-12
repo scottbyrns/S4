@@ -1,4 +1,6 @@
-# S4 - Server Side Swift Standards
+# Swift X
+
+Cross project standards for Swift
 
 ## Mission
 
@@ -16,3 +18,19 @@ Swift X strives to maintain the following core beliefs for all of its standards:
 - Best practices
     - Swift X should abide by any widely accepted best practices in the Swift community, like naming conventions.
     
+# S4 - Server Side Swift Standards
+
+**S4** is Swift X's first package. It's goal is to create standards for server side frameworks.
+
+This is what we have so far:
+
+- [Byte](Docs/byte.md)
+- [HTTPVersion](Docs/http-version.md)
+- [HTTPStatus](Docs/http-status.md)
+
+Keep in mind that **everything** is open for discussion. We have [pull requests](https://github.com/swift-x/s4/pulls) for each item. Every discussion related to an item should be done in its respective PR, even if it's already merged/closed. We **urge** you to participate on the discussions and contribute.
+
+License
+-------
+
+**S4** is released under the MIT license. See LICENSE for details.
