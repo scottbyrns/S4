@@ -6,6 +6,8 @@
 {{code}}
 ```
 
+> Note: The code could be a shortened version containing only the important parts.
+
 ## Motivation
 
 {{motivation}}
