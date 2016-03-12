@@ -132,7 +132,7 @@ extension HTTPStatus {
             case NotExtended.statusCode:                   self = NotExtended
             case NetworkAuthenticationRequired.statusCode: self = NetworkAuthenticationRequired
 
-            default: self = Raw(statusCode: statusCode, reasonPhrase: "UNKNOWN")
+            default: self = Raw(statusCode: statusCode, reasonPhrase: "S4")
             }
         }
     }
