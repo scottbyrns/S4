@@ -1,6 +1,6 @@
 # Swift X
 
-Cross project standards for Swift
+Cross project standards for Swift.
 
 ## Mission
 
