@@ -15,3 +15,8 @@
 ## Alternatives (Optional)
 
 {{alternatives}}
+
+## References (Optional)
+
+- [{{reference1}}](http://link.to/reference)
+- [{{reference2}}](http://link.to/reference)
