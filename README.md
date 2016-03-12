@@ -20,7 +20,7 @@ Swift X strives to maintain the following core beliefs for all of its standards:
     
 # S4 - Server Side Swift Standards
 
-**S4** is Swift X's first package. It's goal is to create standards for server side frameworks.
+**S4** is Swift X's first package. Its goal is to create standards for server side frameworks.
 
 This is what we have so far:
 
