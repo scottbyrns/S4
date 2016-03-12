@@ -37,7 +37,7 @@ For a new proposal you should create a pull request containing the following:
 - Pull request body description in the format defined in the [template](template.md).
 - A markdown file in the format defined in the [template](template.md). The file should be located under the `Docs` directory and follow the naming convetion `example-file.md`.
 - A swift file containing the code for the proposal located under the `Sources` directory.
-- A link to the proposal markdown file in the `README.md` (this file), right below "This is what we have so far:". The items should be sorted alphabetically.
+- A link to the proposal markdown file in the `README.md` (this file), right below **This is what we have so far**. The items should be sorted alphabetically.
 
 License
 -------
