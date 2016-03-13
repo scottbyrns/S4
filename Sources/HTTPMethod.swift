@@ -9,6 +9,7 @@ public enum HTTPMethod {
     case Connect
     case Options
     case Trace
+    case Patch
     case Other(method: String)
 }
 
@@ -23,7 +24,8 @@ extension HTTPMethod: Hashable {
         case .Connect:         return 5
         case .Options:         return 6
         case .Trace:           return 7
-        case .Other(let method): return 8 + method.hashValue
+        case .Patch:           return 8
+        case .Other(let method): return 9 + method.hashValue
         }
     }
 }
@@ -52,6 +54,8 @@ extension HTTPMethod {
           self = .Options
       case "TRACE":
           self = .Trace
+      case "PATCH":
+          self = .Patch
       default:
           self = .Other(method: method)
       }
@@ -69,6 +73,7 @@ extension HTTPMethod: CustomStringConvertible {
         case .Connect:         return "CONNECT"
         case .Options:         return "OPTIONS"
         case .Trace:           return "TRACE"
+        case .Patch:           return "PATCH"
         case .Other(let method): return method.uppercaseString
         }
     }
