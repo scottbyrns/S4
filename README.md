@@ -29,6 +29,7 @@ This is what we have so far:
 - [HTTPHeader](Docs/http-header.md)
 - [HTTPMessage](Docs/http-message.md)
 - [HTTPMethod](Docs/http-method.md)
+- [HTTPRequest](Docs/http-request.md)
 - [HTTPStatus](Docs/http-status.md)
 - [HTTPVersion](Docs/http-version.md)
 - [URI](Docs/uri.md)
