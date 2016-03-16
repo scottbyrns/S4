@@ -30,6 +30,7 @@ This is what we have so far:
 - [HTTPMessage](Docs/http-message.md)
 - [HTTPMethod](Docs/http-method.md)
 - [HTTPRequest](Docs/http-request.md)
+- [HTTPResponse](Docs/http-response.md)
 - [HTTPStatus](Docs/http-status.md)
 - [HTTPVersion](Docs/http-version.md)
 - [URI](Docs/uri.md)
