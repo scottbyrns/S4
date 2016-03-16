@@ -28,6 +28,7 @@ This is what we have so far:
 - [HTTPMethod](Docs/http-method.md)
 - [HTTPStatus](Docs/http-status.md)
 - [HTTPVersion](Docs/http-version.md)
+- [Stream](Docs/stream.md)
 
 Keep in mind that **everything** is open for discussion. We have [pull requests](https://github.com/swift-x/s4/pulls) for each item. Every discussion related to an item should be done in its respective PR, even if it's already merged/closed. We **urge** you to participate on the discussions and contribute.
 
