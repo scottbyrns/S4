@@ -26,6 +26,7 @@ This is what we have so far:
 
 - [Byte](Docs/byte.md)
 - [Data](Docs/data.md)
+- [HTTPBody](Docs/http-body.md)
 - [HTTPHeader](Docs/http-header.md)
 - [HTTPHeaders](Docs/http-headers.md)
 - [HTTPMessage](Docs/http-message.md)
