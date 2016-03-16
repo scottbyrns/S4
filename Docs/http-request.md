@@ -9,7 +9,7 @@ public struct HTTPRequest: HTTPMessage {
     public var version: HTTPVersion
     public var headers: HTTPHeaders
     public var body: HTTPBody
-    public var storage: Storage = [:]
+    public var storage: Storage
 }
 ```
 
