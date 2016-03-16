@@ -1,4 +1,4 @@
 public struct HTTPHeader {
-    public let name: String
-    public let value: String
+    public var name: String
+    public var value: String
 }
