@@ -4,7 +4,7 @@ The `URI` type represents an URI.
 
 ```swift
 public struct URI {
-    public struct userInfo {
+    public struct UserInfo {
         public var username: String
         public var password: String
     }
@@ -15,7 +15,7 @@ public struct URI {
     }
 
     public var scheme: String?
-    public var userInfo: userInfo?
+    public var userInfo: UserInfo?
     public var host: String?
     public var port: Int?
     public var path: String?
