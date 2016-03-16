@@ -26,9 +26,19 @@ This is what we have so far:
 
 - [Byte](Docs/byte.md)
 - [CustomDataStore](Docs/custom-data-store.md)
+- [Data](Docs/data.md)
+- [HTTPBody](Docs/http-body.md)
+- [HTTPHeader](Docs/http-header.md)
+- [HTTPHeaders](Docs/http-headers.md)
+- [HTTPMessage](Docs/http-message.md)
 - [HTTPMethod](Docs/http-method.md)
+- [HTTPMiddleware](Docs/http-middleware.md)
+- [HTTPRequest](Docs/http-request.md)
+- [HTTPResponse](Docs/http-response.md)
 - [HTTPStatus](Docs/http-status.md)
 - [HTTPVersion](Docs/http-version.md)
+- [Stream](Docs/stream.md)
+- [URI](Docs/uri.md)
 
 Keep in mind that **everything** is open for discussion. We have [pull requests](https://github.com/swift-x/s4/pulls) for each item. Every discussion related to an item should be done in its respective PR, even if it's already merged/closed. We **urge** you to participate on the discussions and contribute.
 
