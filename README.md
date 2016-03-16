@@ -25,6 +25,7 @@ Swift X strives to maintain the following core beliefs for all of its standards:
 This is what we have so far:
 
 - [Byte](Docs/byte.md)
+- [Data](Docs/data.md)
 - [HTTPMethod](Docs/http-method.md)
 - [HTTPStatus](Docs/http-status.md)
 - [HTTPVersion](Docs/http-version.md)
