@@ -36,6 +36,7 @@ This is what we have so far:
 - [HTTPResponse](Docs/http-response.md)
 - [HTTPStatus](Docs/http-status.md)
 - [HTTPVersion](Docs/http-version.md)
+- [Storage](Docs/storage.md)
 - [Stream](Docs/stream.md)
 - [URI](Docs/uri.md)
 
