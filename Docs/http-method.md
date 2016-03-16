@@ -1,3 +1,7 @@
+# HTTPMethod
+
+The `HTTPMethod` type represents an HTTP method.
+
 ```swift
 public enum HTTPMethod {
     case Delete
