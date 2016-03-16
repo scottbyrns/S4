@@ -26,6 +26,7 @@ This is what we have so far:
 
 - [Byte](Docs/byte.md)
 - [HTTPMethod](Docs/http-method.md)
+- [HTTPResponse](Docs/http-response.md)
 - [HTTPStatus](Docs/http-status.md)
 - [HTTPVersion](Docs/http-version.md)
 
