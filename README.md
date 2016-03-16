@@ -25,6 +25,7 @@ Swift X strives to maintain the following core beliefs for all of its standards:
 This is what we have so far:
 
 - [Byte](Docs/byte.md)
+- [CustomDataStore](Docs/custom-data-store.md)
 - [Data](Docs/data.md)
 - [HTTPBody](Docs/http-body.md)
 - [HTTPHeader](Docs/http-header.md)
