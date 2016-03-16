@@ -30,6 +30,7 @@ This is what we have so far:
 - [HTTPHeaders](Docs/http-headers.md)
 - [HTTPMessage](Docs/http-message.md)
 - [HTTPMethod](Docs/http-method.md)
+- [HTTPMiddleware](Docs/http-middleware.md)
 - [HTTPRequest](Docs/http-request.md)
 - [HTTPResponse](Docs/http-response.md)
 - [HTTPStatus](Docs/http-status.md)
