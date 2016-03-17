@@ -26,33 +26,38 @@ Swift X strives to maintain the following core beliefs for all of its standards:
 
 This is what we have so far:
 
+Basic Types:
+
 - [Byte](Docs/byte.md)
-- [CustomDataStore](Docs/custom-data-store.md)
 - [Data](Docs/data.md)
 - [HTTPBody](Docs/http-body.md)
 - [HTTPHeader](Docs/http-header.md)
 - [HTTPHeaders](Docs/http-headers.md)
 - [HTTPMessage](Docs/http-message.md)
 - [HTTPMethod](Docs/http-method.md)
-- [HTTPMiddleware](Docs/http-middleware.md)
 - [HTTPRequest](Docs/http-request.md)
+- [HTTPResponse](Docs/http-response.md)
+- [HTTPStatus](Docs/http-status.md)
+- [HTTPVersion](Docs/http-version.md)
+- [Storage](Docs/storage.md)
+- [URI](Docs/uri.md)
+
+Protocols:
+
+- [CustomDataStore](Docs/custom-data-store.md)
+- [HTTPMiddleware](Docs/http-middleware.md)
 - [HTTPRequestConvertible](Docs/http-request-convertible.md)
 - [HTTPRequestInitializable](Docs/http-request-initializable.md)
 - [HTTPRequestParser](Docs/http-request-parser.md)
 - [HTTPRequestRepresentable](Docs/http-request-representable.md)
 - [HTTPRequestSerializer](Docs/http-request-serializer.md)
 - [HTTPResponder](Docs/http-responder.md)
-- [HTTPResponse](Docs/http-response.md)
 - [HTTPResponseConvertible](Docs/http-response-convertible.md)
 - [HTTPResponseInitializable](Docs/http-response-initializable.md)
 - [HTTPResponseParser](Docs/http-response-parser.md)
 - [HTTPResponseRepresentable](Docs/http-response-representable.md)
 - [HTTPResponseSerializer](Docs/http-response-serializer.md)
-- [HTTPStatus](Docs/http-status.md)
-- [HTTPVersion](Docs/http-version.md)
-- [Storage](Docs/storage.md)
 - [Stream](Docs/stream.md)
-- [URI](Docs/uri.md)
 
 Keep in mind that **everything** is open for discussion. We have [pull requests](https://github.com/swift-x/s4/pulls) for each item. Every discussion related to an item should be done in its respective PR, even if it's already merged/closed. We **urge** you to participate on the discussions and contribute.
 
@@ -63,7 +68,7 @@ For a new proposal you should create a pull request containing the following:
 - Pull request body description in the format defined in the [template](template.md).
 - A markdown file in the format defined in the [template](template.md). The file should be located under the `Docs` directory and follow the naming convetion `example-file.md`.
 - A swift file containing the code for the proposal located under the `Sources` directory.
-- A link to the proposal markdown file in the `README.md` (this file), right below **This is what we have so far**. The items should be sorted alphabetically.
+- A link to the proposal markdown file in the `README.md` (this file), right below **This is what we have so far** in its corresponding category. The items should be sorted alphabetically.
 
 License
 -------
