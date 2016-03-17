@@ -1,6 +1,6 @@
 # HTTPStatus
 
-The `HTTPStatus` protocol represents an HTTP status.
+The `HTTPStatus` type represents an HTTP status.
 
 ```swift
 public enum HTTPStatus {
