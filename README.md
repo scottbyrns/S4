@@ -1,5 +1,7 @@
 # Swift X
 
+[![Slack][slack-badge]][slack-url]
+
 Cross project standards for Swift.
 
 ## Mission
@@ -67,3 +69,6 @@ License
 -------
 
 **S4** is released under the MIT license. See LICENSE for details.
+
+[slack-badge]: http://slack.swiftx.io/badge.svg
+[slack-url]: http://slack.swiftx.io
