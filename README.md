@@ -28,18 +28,18 @@ This is what we have so far:
 
 Basic Types:
 
+- [Body](Docs/body.md)
 - [Byte](Docs/byte.md)
 - [Data](Docs/data.md)
-- [Body](Docs/body.md)
 - [Header](Docs/header.md)
 - [Headers](Docs/headers.md)
 - [Method](Docs/method.md)
 - [Request](Docs/request.md)
 - [Response](Docs/response.md)
 - [Status](Docs/status.md)
-- [Version](Docs/version.md)
 - [Storage](Docs/storage.md)
 - [URI](Docs/uri.md)
+- [Version](Docs/version.md)
 
 Protocols:
 
