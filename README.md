@@ -33,7 +33,6 @@ Basic Types:
 - [HTTPBody](Docs/http-body.md)
 - [HTTPHeader](Docs/http-header.md)
 - [HTTPHeaders](Docs/http-headers.md)
-- [HTTPMessage](Docs/http-message.md)
 - [HTTPMethod](Docs/http-method.md)
 - [HTTPRequest](Docs/http-request.md)
 - [HTTPResponse](Docs/http-response.md)
@@ -45,6 +44,7 @@ Basic Types:
 Protocols:
 
 - [CustomDataStore](Docs/custom-data-store.md)
+- [HTTPMessage](Docs/http-message.md)
 - [HTTPMiddleware](Docs/http-middleware.md)
 - [HTTPRequestConvertible](Docs/http-request-convertible.md)
 - [HTTPRequestInitializable](Docs/http-request-initializable.md)
