@@ -1,1 +1,0 @@
-public protocol HTTPResponseConvertible: HTTPResponseInitializable, HTTPResponseRepresentable {}
