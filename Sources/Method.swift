@@ -36,7 +36,7 @@ public func ==(lhs: Method, rhs: Method) -> Bool {
 
 extension Method {
     init(_ rawValue: String) {
-      let method = rawValue.uppercaseString
+      let method = rawValue.uppercased()
       switch method {
       case "DELETE":
           self = .Delete
@@ -74,7 +74,7 @@ extension Method: CustomStringConvertible {
         case .Options:         return "OPTIONS"
         case .Trace:           return "TRACE"
         case .Patch:           return "PATCH"
-        case .Other(let method): return method.uppercaseString
+        case .Other(let method): return method.uppercased()
         }
     }
 }

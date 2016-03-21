@@ -4,7 +4,7 @@ public protocol Responder {
 
 typealias Respond = Request throws -> Response
 
-struct DefaultResponder: Responder {
+struct XResponder: Responder {
     let respond: Respond
 
     init(_ respond: Respond) {

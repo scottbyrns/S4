@@ -4,17 +4,17 @@ public protocol Middleware {
 
 extension Middleware {
     public func intercept(responder: Responder) -> Responder {
-        return DefaultResponder { request in
+        return XResponder { request in
             return try self.respond(request, chain: responder)
         }
     }
 }
 
-extension CollectionType where Self.Generator.Element == Middleware {
+extension Collection where Self.Iterator.Element == Middleware {
     public func intercept(responder: Responder) -> Responder {
         var responder = responder
 
-        for middleware in self.reverse() {
+        for middleware in self.reversed() {
             responder = middleware.intercept(responder)
         }
 
