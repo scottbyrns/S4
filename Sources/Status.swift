@@ -1,138 +1,138 @@
 public enum Status {
-    case Continue
-    case SwitchingProtocols
-    case Processing
+    case `continue`
+    case switchingProtocols
+    case processing
 
-    case OK
-    case Created
-    case Accepted
-    case NonAuthoritativeInformation
-    case NoContent
-    case ResetContent
-    case PartialContent
+    case ok
+    case created
+    case accepted
+    case nonAuthoritativeInformation
+    case noContent
+    case resetContent
+    case partialContent
 
-    case MultipleChoices
-    case MovedPermanently
-    case Found
-    case SeeOther
-    case NotModified
-    case UseProxy
-    case SwitchProxy
-    case TemporaryRedirect
-    case PermanentRedirect
+    case multipleChoices
+    case movedPermanently
+    case found
+    case seeOther
+    case notModified
+    case useProxy
+    case switchProxy
+    case temporaryRedirect
+    case permanentRedirect
 
-    case BadRequest
-    case Unauthorized
-    case PaymentRequired
-    case Forbidden
-    case NotFound
-    case MethodNotAllowed
-    case NotAcceptable
-    case ProxyAuthenticationRequired
-    case RequestTimeout
-    case Conflict
-    case Gone
-    case LengthRequired
-    case PreconditionFailed
-    case RequestEntityTooLarge
-    case RequestURITooLong
-    case UnsupportedMediaType
-    case RequestedRangeNotSatisfiable
-    case ExpectationFailed
-    case ImATeapot
-    case AuthenticationTimeout
-    case EnhanceYourCalm
-    case UnprocessableEntity
-    case Locked
-    case FailedDependency
-    case PreconditionRequired
-    case TooManyRequests
-    case RequestHeaderFieldsTooLarge
+    case badRequest
+    case unauthorized
+    case paymentRequired
+    case forbidden
+    case notFound
+    case methodNotAllowed
+    case notAcceptable
+    case proxyAuthenticationRequired
+    case requestTimeout
+    case conflict
+    case gone
+    case lengthRequired
+    case preconditionFailed
+    case requestEntityTooLarge
+    case requestURITooLong
+    case unsupportedMediaType
+    case requestedRangeNotSatisfiable
+    case expectationFailed
+    case imATeapot
+    case authenticationTimeout
+    case enhanceYourCalm
+    case unprocessableEntity
+    case locked
+    case failedDependency
+    case preconditionRequired
+    case tooManyRequests
+    case requestHeaderFieldsTooLarge
 
-    case InternalServerError
-    case NotImplemented
-    case BadGateway
-    case ServiceUnavailable
-    case GatewayTimeout
-    case HTTPVersionNotSupported
-    case VariantAlsoNegotiates
-    case InsufficientStorage
-    case LoopDetected
-    case NotExtended
-    case NetworkAuthenticationRequired
+    case internalServerError
+    case notImplemented
+    case badGateway
+    case serviceUnavailable
+    case gatewayTimeout
+    case httpVersionNotSupported
+    case variantAlsoNegotiates
+    case insufficientStorage
+    case loopDetected
+    case notExtended
+    case networkAuthenticationRequired
 
-    case Raw(statusCode: Int, reasonPhrase: String)
+    case other(statusCode: Int, reasonPhrase: String)
 }
 
 extension Status {
     public init(statusCode: Int, reasonPhrase: String? = nil) {
         if let reasonPhrase = reasonPhrase {
-            self = Raw(statusCode: statusCode, reasonPhrase: reasonPhrase)
+            self = other(statusCode: statusCode, reasonPhrase: reasonPhrase)
         } else {
             switch statusCode {
-            case Continue.statusCode:                      self = Continue
-            case SwitchingProtocols.statusCode:            self = SwitchingProtocols
-            case Processing.statusCode:                    self = Processing
+            case `continue`.statusCode:                    self = `continue`
+            case switchingProtocols.statusCode:            self = switchingProtocols
+            case processing.statusCode:                    self = processing
 
-            case OK.statusCode:                            self = OK
-            case Created.statusCode:                       self = Created
-            case Accepted.statusCode:                      self = Accepted
-            case NonAuthoritativeInformation.statusCode:   self = NonAuthoritativeInformation
-            case NoContent.statusCode:                     self = NoContent
-            case ResetContent.statusCode:                  self = ResetContent
-            case PartialContent.statusCode:                self = PartialContent
+            case ok.statusCode:                            self = ok
+            case created.statusCode:                       self = created
+            case accepted.statusCode:                      self = accepted
+            case nonAuthoritativeInformation.statusCode:   self = nonAuthoritativeInformation
+            case noContent.statusCode:                     self = noContent
+            case resetContent.statusCode:                  self = resetContent
+            case partialContent.statusCode:                self = partialContent
 
-            case MultipleChoices.statusCode:               self = MultipleChoices
-            case MovedPermanently.statusCode:              self = MovedPermanently
-            case Found.statusCode:                         self = Found
-            case SeeOther.statusCode:                      self = SeeOther
-            case NotModified.statusCode:                   self = NotModified
-            case UseProxy.statusCode:                      self = UseProxy
-            case SwitchProxy.statusCode:                   self = SwitchProxy
-            case TemporaryRedirect.statusCode:             self = TemporaryRedirect
-            case PermanentRedirect.statusCode:             self = PermanentRedirect
+            case multipleChoices.statusCode:               self = multipleChoices
+            case movedPermanently.statusCode:              self = movedPermanently
+            case found.statusCode:                         self = found
+            case seeOther.statusCode:                      self = seeOther
+            case notModified.statusCode:                   self = notModified
+            case useProxy.statusCode:                      self = useProxy
+            case switchProxy.statusCode:                   self = switchProxy
+            case temporaryRedirect.statusCode:             self = temporaryRedirect
+            case permanentRedirect.statusCode:             self = permanentRedirect
 
-            case BadRequest.statusCode:                    self = BadRequest
-            case Unauthorized.statusCode:                  self = Unauthorized
-            case PaymentRequired.statusCode:               self = PaymentRequired
-            case Forbidden.statusCode:                     self = Forbidden
-            case NotFound.statusCode:                      self = NotFound
-            case MethodNotAllowed.statusCode:              self = MethodNotAllowed
-            case NotAcceptable.statusCode:                 self = NotAcceptable
-            case ProxyAuthenticationRequired.statusCode:   self = ProxyAuthenticationRequired
-            case RequestTimeout.statusCode:                self = RequestTimeout
-            case Conflict.statusCode:                      self = Conflict
-            case Gone.statusCode:                          self = Gone
-            case LengthRequired.statusCode:                self = LengthRequired
-            case PreconditionFailed.statusCode:            self = PreconditionFailed
-            case RequestEntityTooLarge.statusCode:         self = RequestEntityTooLarge
-            case RequestURITooLong.statusCode:             self = RequestURITooLong
-            case UnsupportedMediaType.statusCode:          self = UnsupportedMediaType
-            case RequestedRangeNotSatisfiable.statusCode:  self = RequestedRangeNotSatisfiable
-            case ExpectationFailed.statusCode:             self = ExpectationFailed
-            case ImATeapot.statusCode:                     self = ImATeapot
-            case AuthenticationTimeout.statusCode:         self = AuthenticationTimeout
-            case EnhanceYourCalm.statusCode:               self = EnhanceYourCalm
-            case UnprocessableEntity.statusCode:           self = UnprocessableEntity
-            case Locked.statusCode:                        self = Locked
-            case FailedDependency.statusCode:              self = FailedDependency
-            case PreconditionRequired.statusCode:          self = PreconditionRequired
-            case TooManyRequests.statusCode:               self = TooManyRequests
-            case RequestHeaderFieldsTooLarge.statusCode:   self = RequestHeaderFieldsTooLarge
+            case badRequest.statusCode:                    self = badRequest
+            case unauthorized.statusCode:                  self = unauthorized
+            case paymentRequired.statusCode:               self = paymentRequired
+            case forbidden.statusCode:                     self = forbidden
+            case notFound.statusCode:                      self = notFound
+            case methodNotAllowed.statusCode:              self = methodNotAllowed
+            case notAcceptable.statusCode:                 self = notAcceptable
+            case proxyAuthenticationRequired.statusCode:   self = proxyAuthenticationRequired
+            case requestTimeout.statusCode:                self = requestTimeout
+            case conflict.statusCode:                      self = conflict
+            case gone.statusCode:                          self = gone
+            case lengthRequired.statusCode:                self = lengthRequired
+            case preconditionFailed.statusCode:            self = preconditionFailed
+            case requestEntityTooLarge.statusCode:         self = requestEntityTooLarge
+            case requestURITooLong.statusCode:             self = requestURITooLong
+            case unsupportedMediaType.statusCode:          self = unsupportedMediaType
+            case requestedRangeNotSatisfiable.statusCode:  self = requestedRangeNotSatisfiable
+            case expectationFailed.statusCode:             self = expectationFailed
+            case imATeapot.statusCode:                     self = imATeapot
+            case authenticationTimeout.statusCode:         self = authenticationTimeout
+            case enhanceYourCalm.statusCode:               self = enhanceYourCalm
+            case unprocessableEntity.statusCode:           self = unprocessableEntity
+            case locked.statusCode:                        self = locked
+            case failedDependency.statusCode:              self = failedDependency
+            case preconditionRequired.statusCode:          self = preconditionRequired
+            case tooManyRequests.statusCode:               self = tooManyRequests
+            case requestHeaderFieldsTooLarge.statusCode:   self = requestHeaderFieldsTooLarge
 
-            case InternalServerError.statusCode:           self = InternalServerError
-            case NotImplemented.statusCode:                self = NotImplemented
-            case BadGateway.statusCode:                    self = BadGateway
-            case ServiceUnavailable.statusCode:            self = ServiceUnavailable
-            case GatewayTimeout.statusCode:                self = GatewayTimeout
-            case HTTPVersionNotSupported.statusCode:       self = HTTPVersionNotSupported
-            case VariantAlsoNegotiates.statusCode:         self = VariantAlsoNegotiates
-            case InsufficientStorage.statusCode:           self = InsufficientStorage
-            case LoopDetected.statusCode:                  self = LoopDetected
-            case NotExtended.statusCode:                   self = NotExtended
-            case NetworkAuthenticationRequired.statusCode: self = NetworkAuthenticationRequired
+            case internalServerError.statusCode:           self = internalServerError
+            case notImplemented.statusCode:                self = notImplemented
+            case badGateway.statusCode:                    self = badGateway
+            case serviceUnavailable.statusCode:            self = serviceUnavailable
+            case gatewayTimeout.statusCode:                self = gatewayTimeout
+            case httpVersionNotSupported.statusCode:       self = httpVersionNotSupported
+            case variantAlsoNegotiates.statusCode:         self = variantAlsoNegotiates
+            case insufficientStorage.statusCode:           self = insufficientStorage
+            case loopDetected.statusCode:                  self = loopDetected
+            case notExtended.statusCode:                   self = notExtended
+            case networkAuthenticationRequired.statusCode: self = networkAuthenticationRequired
 
-            default: self = Raw(statusCode: statusCode, reasonPhrase: "S4")
+            default: self = other(statusCode: statusCode, reasonPhrase: "S4")
             }
         }
     }
@@ -141,70 +141,70 @@ extension Status {
 extension Status {
     public var statusCode: Int {
         switch self {
-        case .Continue:                      return 100
-        case .SwitchingProtocols:            return 101
-        case .Processing:                    return 102
+        case .`continue`:                    return 100
+        case .switchingProtocols:            return 101
+        case .processing:                    return 102
 
-        case .OK:                            return 200
-        case .Created:                       return 201
-        case .Accepted:                      return 202
-        case .NonAuthoritativeInformation:   return 203
-        case .NoContent:                     return 204
-        case .ResetContent:                  return 205
-        case .PartialContent:                return 206
+        case .ok:                            return 200
+        case .created:                       return 201
+        case .accepted:                      return 202
+        case .nonAuthoritativeInformation:   return 203
+        case .noContent:                     return 204
+        case .resetContent:                  return 205
+        case .partialContent:                return 206
 
-        case .MultipleChoices:               return 300
-        case .MovedPermanently:              return 301
-        case .Found:                         return 302
-        case .SeeOther:                      return 303
-        case .NotModified:                   return 304
-        case .UseProxy:                      return 305
-        case .SwitchProxy:                   return 306
-        case .TemporaryRedirect:             return 307
-        case .PermanentRedirect:             return 308
+        case .multipleChoices:               return 300
+        case .movedPermanently:              return 301
+        case .found:                         return 302
+        case .seeOther:                      return 303
+        case .notModified:                   return 304
+        case .useProxy:                      return 305
+        case .switchProxy:                   return 306
+        case .temporaryRedirect:             return 307
+        case .permanentRedirect:             return 308
 
 
-        case .BadRequest:                    return 400
-        case .Unauthorized:                  return 401
-        case .PaymentRequired:               return 402
-        case .Forbidden:                     return 403
-        case .NotFound:                      return 404
-        case .MethodNotAllowed:              return 405
-        case .NotAcceptable:                 return 406
-        case .ProxyAuthenticationRequired:   return 407
-        case .RequestTimeout:                return 408
-        case .Conflict:                      return 409
-        case .Gone:                          return 410
-        case .LengthRequired:                return 411
-        case .PreconditionFailed:            return 412
-        case .RequestEntityTooLarge:         return 413
-        case .RequestURITooLong:             return 414
-        case .UnsupportedMediaType:          return 415
-        case .RequestedRangeNotSatisfiable:  return 416
-        case .ExpectationFailed:             return 417
-        case .ImATeapot:                     return 418
-        case .AuthenticationTimeout:         return 419
-        case .EnhanceYourCalm:               return 420
-        case .UnprocessableEntity:           return 422
-        case .Locked:                        return 423
-        case .FailedDependency:              return 424
-        case .PreconditionRequired:          return 428
-        case .TooManyRequests:               return 429
-        case .RequestHeaderFieldsTooLarge:   return 431
+        case .badRequest:                    return 400
+        case .unauthorized:                  return 401
+        case .paymentRequired:               return 402
+        case .forbidden:                     return 403
+        case .notFound:                      return 404
+        case .methodNotAllowed:              return 405
+        case .notAcceptable:                 return 406
+        case .proxyAuthenticationRequired:   return 407
+        case .requestTimeout:                return 408
+        case .conflict:                      return 409
+        case .gone:                          return 410
+        case .lengthRequired:                return 411
+        case .preconditionFailed:            return 412
+        case .requestEntityTooLarge:         return 413
+        case .requestURITooLong:             return 414
+        case .unsupportedMediaType:          return 415
+        case .requestedRangeNotSatisfiable:  return 416
+        case .expectationFailed:             return 417
+        case .imATeapot:                     return 418
+        case .authenticationTimeout:         return 419
+        case .enhanceYourCalm:               return 420
+        case .unprocessableEntity:           return 422
+        case .locked:                        return 423
+        case .failedDependency:              return 424
+        case .preconditionRequired:          return 428
+        case .tooManyRequests:               return 429
+        case .requestHeaderFieldsTooLarge:   return 431
 
-        case .InternalServerError:           return 500
-        case .NotImplemented:                return 501
-        case .BadGateway:                    return 502
-        case .ServiceUnavailable:            return 503
-        case .GatewayTimeout:                return 504
-        case .HTTPVersionNotSupported:       return 505
-        case .VariantAlsoNegotiates:         return 506
-        case .InsufficientStorage:           return 507
-        case .LoopDetected:                  return 508
-        case .NotExtended:                   return 510
-        case .NetworkAuthenticationRequired: return 511
+        case .internalServerError:           return 500
+        case .notImplemented:                return 501
+        case .badGateway:                    return 502
+        case .serviceUnavailable:            return 503
+        case .gatewayTimeout:                return 504
+        case .httpVersionNotSupported:       return 505
+        case .variantAlsoNegotiates:         return 506
+        case .insufficientStorage:           return 507
+        case .loopDetected:                  return 508
+        case .notExtended:                   return 510
+        case .networkAuthenticationRequired: return 511
 
-        case .Raw(let statusCode, _):        return statusCode
+        case .other(let statusCode, _):        return statusCode
         }
     }
 }
@@ -212,69 +212,79 @@ extension Status {
 extension Status {
     public var reasonPhrase: String {
         switch self {
-        case .Continue:                      return "Continue"
-        case .SwitchingProtocols:            return "Switching Protocols"
-        case .Processing:                    return "Processing"
+        case .`continue`:                    return "Continue"
+        case .switchingProtocols:            return "Switching Protocols"
+        case .processing:                    return "Processing"
 
-        case .OK:                            return "OK"
-        case .Created:                       return "Created"
-        case .Accepted:                      return "Accepted"
-        case .NonAuthoritativeInformation:   return "Non Authoritative Information"
-        case .NoContent:                     return "No Content"
-        case .ResetContent:                  return "Reset Content"
-        case .PartialContent:                return "Partial Content"
+        case .ok:                            return "OK"
+        case .created:                       return "Created"
+        case .accepted:                      return "Accepted"
+        case .nonAuthoritativeInformation:   return "Non Authoritative Information"
+        case .noContent:                     return "No Content"
+        case .resetContent:                  return "Reset Content"
+        case .partialContent:                return "Partial Content"
 
-        case .MultipleChoices:               return "Multiple Choices"
-        case .MovedPermanently:              return "Moved Permanently"
-        case .Found:                         return "Found"
-        case .SeeOther:                      return "See Other"
-        case .NotModified:                   return "Not Modified"
-        case .UseProxy:                      return "Use Proxy"
-        case .SwitchProxy:                   return "Switch Proxy"
-        case .TemporaryRedirect:             return "Temporary Redirect"
-        case .PermanentRedirect:             return "Permanent Redirect"
+        case .multipleChoices:               return "Multiple Choices"
+        case .movedPermanently:              return "Moved Permanently"
+        case .found:                         return "Found"
+        case .seeOther:                      return "See Other"
+        case .notModified:                   return "Not Modified"
+        case .useProxy:                      return "Use Proxy"
+        case .switchProxy:                   return "Switch Proxy"
+        case .temporaryRedirect:             return "Temporary Redirect"
+        case .permanentRedirect:             return "Permanent Redirect"
 
-        case .BadRequest:                    return "Bad Request"
-        case .Unauthorized:                  return "Unauthorized"
-        case .PaymentRequired:               return "Payment Required"
-        case .Forbidden:                     return "Forbidden"
-        case .NotFound:                      return "Not Found"
-        case .MethodNotAllowed:              return "Method Not Allowed"
-        case .NotAcceptable:                 return "Not Acceptable"
-        case .ProxyAuthenticationRequired:   return "Proxy Authentication Required"
-        case .RequestTimeout:                return "Request Timeout"
-        case .Conflict:                      return "Conflict"
-        case .Gone:                          return "Gone"
-        case .LengthRequired:                return "Length Required"
-        case .PreconditionFailed:            return "Precondition Failed"
-        case .RequestEntityTooLarge:         return "Request Entity Too Large"
-        case .RequestURITooLong:             return "Request URI Too Long"
-        case .UnsupportedMediaType:          return "Unsupported Media Type"
-        case .RequestedRangeNotSatisfiable:  return "Requested Range Not Satisfiable"
-        case .ExpectationFailed:             return "Expectation Failed"
-        case .ImATeapot:                     return "I'm A Teapot"
-        case .AuthenticationTimeout:         return "Authentication Timeout"
-        case .EnhanceYourCalm:               return "Enhance Your Calm"
-        case .UnprocessableEntity:           return "Unprocessable Entity"
-        case .Locked:                        return "Locked"
-        case .FailedDependency:              return "Failed Dependency"
-        case .PreconditionRequired:          return "PreconditionR equired"
-        case .TooManyRequests:               return "Too Many Requests"
-        case .RequestHeaderFieldsTooLarge:   return "Request Header Fields Too Large"
+        case .badRequest:                    return "Bad Request"
+        case .unauthorized:                  return "Unauthorized"
+        case .paymentRequired:               return "Payment Required"
+        case .forbidden:                     return "Forbidden"
+        case .notFound:                      return "Not Found"
+        case .methodNotAllowed:              return "Method Not Allowed"
+        case .notAcceptable:                 return "Not Acceptable"
+        case .proxyAuthenticationRequired:   return "Proxy Authentication Required"
+        case .requestTimeout:                return "Request Timeout"
+        case .conflict:                      return "Conflict"
+        case .gone:                          return "Gone"
+        case .lengthRequired:                return "Length Required"
+        case .preconditionFailed:            return "Precondition Failed"
+        case .requestEntityTooLarge:         return "Request Entity Too Large"
+        case .requestURITooLong:             return "Request URI Too Long"
+        case .unsupportedMediaType:          return "Unsupported Media Type"
+        case .requestedRangeNotSatisfiable:  return "Requested Range Not Satisfiable"
+        case .expectationFailed:             return "Expectation Failed"
+        case .imATeapot:                     return "I'm A Teapot"
+        case .authenticationTimeout:         return "Authentication Timeout"
+        case .enhanceYourCalm:               return "Enhance Your Calm"
+        case .unprocessableEntity:           return "Unprocessable Entity"
+        case .locked:                        return "Locked"
+        case .failedDependency:              return "Failed Dependency"
+        case .preconditionRequired:          return "PreconditionR equired"
+        case .tooManyRequests:               return "Too Many Requests"
+        case .requestHeaderFieldsTooLarge:   return "Request Header Fields Too Large"
 
-        case .InternalServerError:           return "Internal Server Error"
-        case .NotImplemented:                return "Not Implemented"
-        case .BadGateway:                    return "Bad Gateway"
-        case .ServiceUnavailable:            return "Service Unavailable"
-        case .GatewayTimeout:                return "Gateway Timeout"
-        case .HTTPVersionNotSupported:       return "HTTP Version Not Supported"
-        case .VariantAlsoNegotiates:         return "Variant Also Negotiates"
-        case .InsufficientStorage:           return "Insufficient Storage"
-        case .LoopDetected:                  return "Loop Detected"
-        case .NotExtended:                   return "Not Extended"
-        case .NetworkAuthenticationRequired: return "Network Authentication Required"
+        case .internalServerError:           return "Internal Server Error"
+        case .notImplemented:                return "Not Implemented"
+        case .badGateway:                    return "Bad Gateway"
+        case .serviceUnavailable:            return "Service Unavailable"
+        case .gatewayTimeout:                return "Gateway Timeout"
+        case .httpVersionNotSupported:       return "HTTP Version Not Supported"
+        case .variantAlsoNegotiates:         return "Variant Also Negotiates"
+        case .insufficientStorage:           return "Insufficient Storage"
+        case .loopDetected:                  return "Loop Detected"
+        case .notExtended:                   return "Not Extended"
+        case .networkAuthenticationRequired: return "Network Authentication Required"
 
-        case .Raw(_, let reasonPhrase):      return reasonPhrase
+        case .other(_, let reasonPhrase):      return reasonPhrase
         }
     }
+}
+
+extension Status: Hashable {
+    public var hashValue: Int {
+        return statusCode
+    }
+}
+
+public func ==(lhs: Status, rhs: Status) -> Bool {
+    return lhs.hashValue == rhs.hashValue
 }
