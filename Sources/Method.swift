@@ -1,37 +1,14 @@
-// Based on established protocols declared https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
-
 public enum Method {
-    case Delete
-    case Get
-    case Head
-    case Post
-    case Put
-    case Connect
-    case Options
-    case Trace
-    case Patch
-    case Other(method: String)
-}
-
-extension Method: Hashable {
-    public var hashValue: Int {
-        switch self {
-        case .Delete:          return 0
-        case .Get:             return 1
-        case .Head:            return 2
-        case .Post:            return 3
-        case .Put:             return 4
-        case .Connect:         return 5
-        case .Options:         return 6
-        case .Trace:           return 7
-        case .Patch:           return 8
-        case .Other(let method): return 9 + method.hashValue
-        }
-    }
-}
-
-public func ==(lhs: Method, rhs: Method) -> Bool {
-    return lhs.hashValue == rhs.hashValue
+    case delete
+    case get
+    case head
+    case post
+    case put
+    case connect
+    case options
+    case trace
+    case patch
+    case other(method: String)
 }
 
 extension Method {
@@ -39,25 +16,25 @@ extension Method {
       let method = rawValue.uppercased()
       switch method {
       case "DELETE":
-          self = .Delete
+          self = .delete
       case "GET":
-          self = .Get
+          self = .get
       case "HEAD":
-          self = .Head
+          self = .head
       case "POST":
-          self = .Post
+          self = .post
       case "PUT":
-          self = .Put
+          self = .put
       case "CONNECT":
-          self = .Connect
+          self = .connect
       case "OPTIONS":
-          self = .Options
+          self = .options
       case "TRACE":
-          self = .Trace
+          self = .trace
       case "PATCH":
-          self = .Patch
+          self = .patch
       default:
-          self = .Other(method: method)
+          self = .other(method: method)
       }
     }
 }
@@ -65,16 +42,37 @@ extension Method {
 extension Method: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Delete:          return "DELETE"
-        case .Get:             return "GET"
-        case .Head:            return "HEAD"
-        case .Post:            return "POST"
-        case .Put:             return "PUT"
-        case .Connect:         return "CONNECT"
-        case .Options:         return "OPTIONS"
-        case .Trace:           return "TRACE"
-        case .Patch:           return "PATCH"
-        case .Other(let method): return method.uppercased()
+        case .delete:          return "DELETE"
+        case .get:             return "GET"
+        case .head:            return "HEAD"
+        case .post:            return "POST"
+        case .put:             return "PUT"
+        case .connect:         return "CONNECT"
+        case .options:         return "OPTIONS"
+        case .trace:           return "TRACE"
+        case .patch:           return "PATCH"
+        case .other(let method): return method.uppercased()
         }
     }
+}
+
+extension Method: Hashable {
+    public var hashValue: Int {
+        switch self {
+        case .delete:          return 0
+        case .get:             return 1
+        case .head:            return 2
+        case .post:            return 3
+        case .put:             return 4
+        case .connect:         return 5
+        case .options:         return 6
+        case .trace:           return 7
+        case .patch:           return 8
+        case .other(let method): return 9 + method.hashValue
+        }
+    }
+}
+
+public func ==(lhs: Method, rhs: Method) -> Bool {
+    return lhs.hashValue == rhs.hashValue
 }
