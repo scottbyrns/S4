@@ -1,3 +1,3 @@
 public protocol RequestInitializable {
-    init(xRequest: Request)
+    init(request: Request)
 }

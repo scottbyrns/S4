@@ -1,3 +1,3 @@
 public protocol ResponseRepresentable {
-    var xResponse: Response { get }
+    var response: Response { get }
 }

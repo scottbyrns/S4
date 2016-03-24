@@ -1,3 +1,3 @@
 public protocol ResponseInitializable {
-    init(xResponse: Response)
+    init(response: Response)
 }
