@@ -4,7 +4,7 @@ public protocol Middleware {
 
 extension Middleware {
     public func intercept(responder: Responder) -> Responder {
-        return XResponder { request in
+        return BasicResponder { request in
             return try self.respond(request, chain: responder)
         }
     }
