@@ -22,6 +22,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol Client: AsyncResponder {
+public protocol AsyncClient: AsyncResponder {
     init(uri: URI) throws
 }
