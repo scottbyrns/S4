@@ -38,3 +38,29 @@ public struct Request: Message {
         self.body = body
     }
 }
+
+extension Request {
+    public init(method: Method = .get, uri: URI = URI(path: "/"), headers: Headers = [:], body: Stream) {
+        self.init(
+            method: method,
+            uri: uri,
+            version: Version(major: 1, minor: 1),
+            headers: headers,
+            body: body
+        )
+
+        self.headers["Transfer-Encoding"] = "chunked"
+    }
+
+    public init(method: Method = .get, uri: URI = URI(path: "/"), headers: Headers = [:], body: Data = Data()) {
+        self.init(
+            method: method,
+            uri: uri,
+            version: Version(major: 1, minor: 1),
+            headers: headers,
+            body: Drain(body)
+        )
+
+        self.headers["Content-Length"] = HeaderValues(body.count.description)
+    }
+}

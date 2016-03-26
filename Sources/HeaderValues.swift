@@ -134,6 +134,24 @@ extension HeaderValues: MutableCollection {
     }
 }
 
+extension HeaderValues: NilLiteralConvertible {
+    public init(nilLiteral: ()) {
+        self.init()
+    }
+}
+
+extension HeaderValues: IntegerLiteralConvertible {
+    public init(integerLiteral value: IntegerLiteralType) {
+        self.init(String(value))
+    }
+}
+
+extension HeaderValues: FloatLiteralConvertible {
+    public init(floatLiteral value: FloatLiteralType) {
+        self.init(String(value))
+    }
+}
+
 extension HeaderValues: StringLiteralConvertible {
     public init(stringLiteral string: String) {
         self.init(string)
@@ -151,12 +169,6 @@ extension HeaderValues: StringLiteralConvertible {
 extension HeaderValues: ArrayLiteralConvertible {
     public init(arrayLiteral elements: String...) {
         self.init(elements)
-    }
-}
-
-extension HeaderValues: NilLiteralConvertible {
-    public init(nilLiteral: ()) {
-        self.init()
     }
 }
 

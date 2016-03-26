@@ -36,3 +36,27 @@ public struct Response: Message {
         self.body = body
     }
 }
+
+extension Response {
+    public init(status: Status = .ok, headers: Headers = [:], body: Stream) {
+        self.init(
+            version: Version(major: 1, minor: 1),
+            status: status,
+            headers: headers,
+            body: body
+        )
+
+        self.headers["Transfer-Encoding"] = "chunked"
+    }
+
+    public init(status: Status = .ok, headers: Headers = [:], body: Data = Data()) {
+        self.init(
+            version: Version(major: 1, minor: 1),
+            status: status,
+            headers: headers,
+            body: Drain(body)
+        )
+
+        self.headers["Content-Length"] = HeaderValues(body.count.description)
+    }
+}
