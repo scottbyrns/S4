@@ -1,4 +1,4 @@
-// Client.swift
+// AsyncClient.swift
 //
 // The MIT License (MIT)
 //
@@ -22,6 +22,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol Client: Responder {
+public protocol Client: AsyncResponder {
     init(uri: URI) throws
 }
