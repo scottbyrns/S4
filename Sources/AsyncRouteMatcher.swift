@@ -1,4 +1,4 @@
-// RequestConvertible.swift
+// AsyncRouteMatcher.swift
 //
 // The MIT License (MIT)
 //
@@ -22,4 +22,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol RequestConvertible: RequestInitializable, RequestRepresentable {}
+public protocol AsyncRouteMatcher {
+    var routes: [AsyncRoute] { get }
+    init(routes: [AsyncRoute])
+    func match(request: Request) -> AsyncRoute?
+}

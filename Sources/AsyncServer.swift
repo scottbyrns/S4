@@ -1,4 +1,4 @@
-// RequestConvertible.swift
+// AsyncServer.swift
 //
 // The MIT License (MIT)
 //
@@ -22,4 +22,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol RequestConvertible: RequestInitializable, RequestRepresentable {}
+public protocol AsyncServer {
+    init(port: Int) throws
+    var port: Int { get }
+    func serve(responder: AsyncResponder) throws
+}

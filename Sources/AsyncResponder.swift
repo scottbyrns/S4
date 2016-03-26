@@ -1,4 +1,4 @@
-// RequestConvertible.swift
+// AsyncResponder.swift
 //
 // The MIT License (MIT)
 //
@@ -22,4 +22,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol RequestConvertible: RequestInitializable, RequestRepresentable {}
+public protocol AsyncResponder {
+    func respond(request: Request, result: (Void throws -> Response) -> Void)
+}
+
+public typealias AsyncRespond = (request: Request, result: (Void throws -> Response) -> Void) -> Void
+
+public struct BasicAsyncResponder: AsyncResponder {
+    let respond: AsyncRespond
+
+    public init(_ respond: AsyncRespond) {
+        self.respond = respond
+    }
+
+    public func respond(request: Request, result: (Void throws -> Response) -> Void) {
+        return respond(request, result: result)
+    }
+}

@@ -1,4 +1,4 @@
-// RequestConvertible.swift
+// AsyncRoute.swift
 //
 // The MIT License (MIT)
 //
@@ -22,4 +22,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-public protocol RequestConvertible: RequestInitializable, RequestRepresentable {}
+public protocol AsyncRoute: AsyncResponder {
+    var path: String { get }
+    var actions: [Method: AsyncResponder] { get }
+    var fallback: AsyncResponder { get }
+}
+
+extension AsyncRoute {
+    public var fallback: AsyncResponder {
+        return BasicAsyncResponder { _, result in
+            result {
+                Response(
+                    version: Version(major: 1, minor: 1),
+                    status: .methodNotAllowed,
+                    headers: Headers([:]),
+                    body: Drain()
+                )
+            }
+        }
+    }
+
+    public func respond(request: Request, result: (Void throws -> Response) -> Void) {
+        let action = actions[request.method] ?? fallback
+        action.respond(request, result: result)
+    }
+}
