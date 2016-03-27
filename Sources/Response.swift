@@ -43,7 +43,7 @@ extension Response {
             version: Version(major: 1, minor: 1),
             status: status,
             headers: headers,
-            body: .StreamBody(body)
+            body: .stream(body)
         )
 
         self.headers["Transfer-Encoding"] = "chunked"
@@ -54,7 +54,7 @@ extension Response {
             version: Version(major: 1, minor: 1),
             status: status,
             headers: headers,
-            body: .BufferBody(body)
+            body: .buffer(body)
         )
 
         self.headers["Content-Length"] = HeaderValues(body.count.description)

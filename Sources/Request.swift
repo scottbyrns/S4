@@ -46,7 +46,7 @@ extension Request {
             uri: uri,
             version: Version(major: 1, minor: 1),
             headers: headers,
-            body: .StreamBody(body)
+            body: .stream(body)
         )
 
         self.headers["Transfer-Encoding"] = "chunked"
@@ -58,7 +58,7 @@ extension Request {
             uri: uri,
             version: Version(major: 1, minor: 1),
             headers: headers,
-            body: .BufferBody(body)
+            body: .buffer(body)
         )
 
         self.headers["Content-Length"] = HeaderValues(body.count.description)

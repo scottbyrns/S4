@@ -23,31 +23,31 @@
 // SOFTWARE.
 
 public enum Body {
-    case BufferBody(Data)
-    case StreamBody(Stream)
+    case buffer(Data)
+    case stream(Stream)
 }
 
 extension Body {
     public var buffer: Data {
         mutating get {
             switch self {
-            case .BufferBody(let data):
+            case .buffer(let data):
                 return data
-            case .StreamBody(let stream):
+            case .stream(let stream):
                 let data = Drain(stream).data
-                self = BufferBody(data)
+                self = .buffer(data)
                 return data
             }
         }
 
         set(data) {
-            self = BufferBody(data)
+            self = .buffer(data)
         }
     }
 
     public var isBuffer: Bool {
         switch self {
-        case .BufferBody: return true
+        case .buffer: return true
         default: return false
         }
     }
@@ -55,23 +55,23 @@ extension Body {
     public var stream: Stream {
         mutating get {
             switch self {
-            case .StreamBody(let stream):
+            case .stream(let stream):
                 return stream
-            case .BufferBody(let data):
+            case .buffer(let data):
                 let stream = Drain(data)
-                self = StreamBody(stream)
+                self = .stream(stream)
                 return stream
             }
         }
 
         set(stream) {
-            self = StreamBody(stream)
+            self = .stream(stream)
         }
     }
 
     public var isStream: Bool {
         switch self {
-        case .StreamBody: return true
+        case .stream: return true
         default: return false
         }
     }
