@@ -31,12 +31,7 @@ public protocol Route: Responder {
 extension Route {
     public var fallback: Responder {
         return BasicResponder { _ in
-            Response(
-                version: Version(major: 1, minor: 1),
-                status: .methodNotAllowed,
-                headers: Headers([:]),
-                body: Drain()
-            )
+            Response(status: .methodNotAllowed)
         }
     }
 

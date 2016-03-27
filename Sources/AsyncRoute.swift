@@ -32,12 +32,7 @@ extension AsyncRoute {
     public var fallback: AsyncResponder {
         return BasicAsyncResponder { _, result in
             result {
-                Response(
-                    version: Version(major: 1, minor: 1),
-                    status: .methodNotAllowed,
-                    headers: Headers([:]),
-                    body: Drain()
-                )
+                Response(status: .methodNotAllowed)
             }
         }
     }

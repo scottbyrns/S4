@@ -27,10 +27,10 @@ public struct Request: Message {
     public var uri: URI
     public var version: Version
     public var headers: Headers
-    public var body: Stream
+    public var body: Body
     public var storage: Storage = [:]
 
-    public init(method: Method, uri: URI, version: Version, headers: Headers, body: Stream) {
+    public init(method: Method, uri: URI, version: Version, headers: Headers, body: Body) {
         self.method = method
         self.uri = uri
         self.version = version
@@ -46,19 +46,19 @@ extension Request {
             uri: uri,
             version: Version(major: 1, minor: 1),
             headers: headers,
-            body: body
+            body: .StreamBody(body)
         )
 
         self.headers["Transfer-Encoding"] = "chunked"
     }
 
-    public init(method: Method = .get, uri: URI = URI(path: "/"), headers: Headers = [:], body: Data = Data()) {
+    public init(method: Method = .get, uri: URI = URI(path: "/"), headers: Headers = [:], body: Data = nil) {
         self.init(
             method: method,
             uri: uri,
             version: Version(major: 1, minor: 1),
             headers: headers,
-            body: Drain(body)
+            body: .BufferBody(body)
         )
 
         self.headers["Content-Length"] = HeaderValues(body.count.description)
