@@ -24,10 +24,22 @@ extension Headers: NilLiteralConvertible {
     }
 }
 
-extension Headers: Sequence {
+#if swift(>=3.0)
+extension Headers: Sequence {}
+#else
+extension Headers: SequenceType {}
+#endif
+
+extension Headers {
+    #if swift(>=3.0)
     public func makeIterator() -> DictionaryIterator<HeaderName, HeaderValues> {
         return headers.makeIterator()
     }
+    #else
+    public func generate() -> DictionaryGenerator<HeaderName, HeaderValues> {
+        return headers.generate()
+    }
+    #endif
 
     public var count: Int {
         return headers.count

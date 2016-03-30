@@ -13,46 +13,65 @@ public enum Method {
 
 extension Method {
     init(_ rawValue: String) {
-      let method = rawValue.uppercased()
-      switch method {
-      case "DELETE":
-          self = .delete
-      case "GET":
-          self = .get
-      case "HEAD":
-          self = .head
-      case "POST":
-          self = .post
-      case "PUT":
-          self = .put
-      case "CONNECT":
-          self = .connect
-      case "OPTIONS":
-          self = .options
-      case "TRACE":
-          self = .trace
-      case "PATCH":
-          self = .patch
-      default:
-          self = .other(method: method)
-      }
+        #if swift(>=3.0)
+        let method = rawValue.uppercased()
+        #else
+        let method = rawValue.uppercaseString
+        #endif
+        switch method {
+        case "DELETE":
+            self = .delete
+        case "GET":
+            self = .get
+        case "HEAD":
+            self = .head
+        case "POST":
+            self = .post
+        case "PUT":
+            self = .put
+        case "CONNECT":
+            self = .connect
+        case "OPTIONS":
+            self = .options
+        case "TRACE":
+            self = .trace
+        case "PATCH":
+            self = .patch
+        default:
+            self = .other(method: method)
+        }
     }
 }
 
 extension Method: CustomStringConvertible {
     public var description: String {
+        #if swift(>=3.0)
         switch self {
-        case .delete:          return "DELETE"
-        case .get:             return "GET"
-        case .head:            return "HEAD"
-        case .post:            return "POST"
-        case .put:             return "PUT"
-        case .connect:         return "CONNECT"
-        case .options:         return "OPTIONS"
-        case .trace:           return "TRACE"
-        case .patch:           return "PATCH"
+        case .delete:            return "DELETE"
+        case .get:               return "GET"
+        case .head:              return "HEAD"
+        case .post:              return "POST"
+        case .put:               return "PUT"
+        case .connect:           return "CONNECT"
+        case .options:           return "OPTIONS"
+        case .trace:             return "TRACE"
+        case .patch:             return "PATCH"
         case .other(let method): return method.uppercased()
         }
+        #else
+        switch self {
+        case .delete:            return "DELETE"
+        case .get:               return "GET"
+        case .head:              return "HEAD"
+        case .post:              return "POST"
+        case .put:               return "PUT"
+        case .connect:           return "CONNECT"
+        case .options:           return "OPTIONS"
+        case .trace:             return "TRACE"
+        case .patch:             return "PATCH"
+        case .other(let method): return method.uppercaseString
+        }
+        #endif
     }
 }
 

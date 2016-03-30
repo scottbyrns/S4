@@ -10,6 +10,7 @@ extension AsyncMiddleware {
     }
 }
 
+#if swift(>=3.0)
 extension Collection where Self.Iterator.Element == AsyncMiddleware {
     public func intercept(responder: AsyncResponder) -> AsyncResponder {
         var responder = responder
@@ -21,3 +22,16 @@ extension Collection where Self.Iterator.Element == AsyncMiddleware {
         return responder
     }
 }
+#else
+extension CollectionType where Self.Generator.Element == AsyncMiddleware {
+    public func intercept(responder: AsyncResponder) -> AsyncResponder {
+        var responder = responder
+
+        for middleware in self.reverse() {
+            responder = middleware.intercept(responder)
+        }
+        
+        return responder
+    }
+}
+#endif
