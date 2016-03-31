@@ -4,7 +4,9 @@ import XCTest
 class BodyTests: XCTestCase {
     static var allTests : [(String, BodyTests -> () throws -> Void)] {
         return [
-           ("testReality", testReality),
+           ("testSender", testSender),
+           ("testReceiver", testReceiver),
+           ("testBuffer", testBuffer),
         ]
     }
 
@@ -51,10 +53,6 @@ class BodyTests: XCTestCase {
         }
         XCTAssert(data.bytes == senderDrain.data.bytes, "Garbled sender bytes")
     }
-
-	func testReality() {
-		XCTAssert(2 + 2 == 4, "Something is severely wrong here.")
-	}
 
 }
 
