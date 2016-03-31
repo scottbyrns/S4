@@ -47,11 +47,12 @@ class BodyTests: XCTestCase {
 
         let senderDrain = Drain()
         (bodyForReceiver.receiver as? Drain)?.open() //must open because of reference semantics
-        guard let _ = try? bodyForSender.sender(senderDrain) else {
-            XCTFail("Drain threw error")
-            return
+        do {
+            try bodyForSender.sender(senderDrain)
+            XCTAssert(data.bytes == senderDrain.data.bytes, "Garbled sender bytes")
+        } catch {
+            XCTFail("Drain threw error \(error)")
         }
-        XCTAssert(data.bytes == senderDrain.data.bytes, "Garbled sender bytes")
     }
 
 }
