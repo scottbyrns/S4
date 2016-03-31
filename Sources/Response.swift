@@ -19,7 +19,7 @@ extension Response {
             version: Version(major: 1, minor: 1),
             status: status,
             headers: headers,
-            body: .stream(body)
+            body: .receiver(body)
         )
 
         self.headers["Transfer-Encoding"] = "chunked"
@@ -34,5 +34,16 @@ extension Response {
         )
 
         self.headers["Content-Length"] = HeaderValues(body.count.description)
+    }
+
+    public init(status: Status = .ok, headers: Headers = [:], body: Stream throws -> Void) {
+        self.init(
+            version: Version(major: 1, minor: 1),
+            status: status,
+            headers: headers,
+            body: .sender(body)
+        )
+
+        self.headers["Transfer-Encoding"] = "chunked"
     }
 }

@@ -4,7 +4,8 @@ import XCTest
 @testable import S4TestSuite
 
 XCTMain([
-    testCase(ExampleTests.allTests)
+    testCase(ExampleTests.allTests),
+    testCase(BodyTests.allTests)
 ])
 
 #endif
