@@ -13,9 +13,9 @@ class BodyTests: XCTestCase {
     let data: Data = [0x00, 0x01, 0x02, 0x03]
 
     func testSender() {
-        let sender = Body.sender({ stream in
+        let sender = Body.sender { stream in
             try stream.send(self.data)
-        })
+        }
 
         testBodyProperties(sender)
     }
@@ -42,7 +42,7 @@ class BodyTests: XCTestCase {
 
         (bodyForReceiver.receiver as? Drain)?.open()
         let receiverDrain = Drain(bodyForReceiver.receiver) //must open because of reference semantics
-        XCTAssert(data.bytes == receiverDrain.data.bytes, "Garbled receiver bytes")
+        XCTAssert(data == receiverDrain.data, "Garbled receiver bytes")
 
 
         let senderDrain = Drain()
