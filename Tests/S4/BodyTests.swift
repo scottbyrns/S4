@@ -38,7 +38,7 @@ class BodyTests: XCTestCase {
         var bodyForReceiver = body
         var bodyForSender = body
 
-        XCTAssert(data.bytes == bodyForBuffer.buffer.bytes, "Garbled buffer bytes")
+        XCTAssert(data == bodyForBuffer.buffer, "Garbled buffer bytes")
 
         (bodyForReceiver.receiver as? Drain)?.open()
         let receiverDrain = Drain(bodyForReceiver.receiver) //must open because of reference semantics
