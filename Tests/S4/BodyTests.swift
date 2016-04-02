@@ -49,7 +49,7 @@ class BodyTests: XCTestCase {
         (bodyForReceiver.receiver as? Drain)?.open() //must open because of reference semantics
         do {
             try bodyForSender.sender(senderDrain)
-            XCTAssert(data.bytes == senderDrain.data.bytes, "Garbled sender bytes")
+            XCTAssert(data == senderDrain.data, "Garbled sender bytes")
         } catch {
             XCTFail("Drain threw error \(error)")
         }
