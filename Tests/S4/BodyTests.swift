@@ -38,7 +38,7 @@ class BodyTests: XCTestCase {
         var bodyForReceiver = body
         var bodyForSender = body
 
-        XCTAssert(data == bodyForBuffer.becomeBuffer(), "Garbled buffer bytes")
+        XCTAssert(data == (try! bodyForBuffer.becomeBuffer()), "Garbled buffer bytes")
         switch bodyForBuffer {
         case .buffer(let d):
             XCTAssert(data == d, "Garbled buffer bytes")
@@ -47,7 +47,7 @@ class BodyTests: XCTestCase {
         }
 
         bodyForReceiver.forceReopenDrain()
-        let receiverDrain = Drain(bodyForReceiver.becomeReceiver())
+        let receiverDrain = Drain(try! bodyForReceiver.becomeReceiver())
         XCTAssert(data == receiverDrain.data, "Garbled receiver bytes")
         switch bodyForReceiver {
         case .receiver(let stream):
@@ -88,7 +88,7 @@ class BodyTests: XCTestCase {
 
 extension Body {
     mutating func forceReopenDrain() {
-        if let drain = self.becomeReceiver() as? Drain {
+        if let drain = (try! self.becomeReceiver()) as? Drain {
             drain.closed = false
         }
     }

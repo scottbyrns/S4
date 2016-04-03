@@ -28,7 +28,7 @@ extension Body {
         If the body is a receiver or sender type,
         it will be drained.
     */
-    public mutating func becomeBuffer() -> Data {
+    public mutating func becomeBuffer() throws -> Data {
         switch self {
         case .buffer(let data):
             return data
@@ -38,11 +38,7 @@ extension Body {
             return data
         case .sender(let sender):
             let drain = Drain()
-            do {
-                try sender(drain)
-            } catch {
-                //do nothing
-            }
+            try sender(drain)
             let data = drain.data
 
             self = .buffer(data)
@@ -62,7 +58,7 @@ extension Body {
         Converts the body's contents into a `Stream`
         that can be received in chunks.
     */
-    public mutating func becomeReceiver() -> Stream {
+    public mutating func becomeReceiver() throws -> Stream {
         switch self {
         case .receiver(let stream):
             return stream
@@ -72,12 +68,7 @@ extension Body {
             return stream
         case .sender(let sender):
             let stream = Drain()
-            do {
-                stream.closed = false
-                try sender(stream)
-            } catch {
-                //do nothing
-            }
+            try sender(stream)
             self = .receiver(stream)
             return stream
         }
