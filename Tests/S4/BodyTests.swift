@@ -40,13 +40,13 @@ class BodyTests: XCTestCase {
 
         XCTAssert(data == bodyForBuffer.buffer, "Garbled buffer bytes")
 
-        (bodyForReceiver.receiver as? Drain)?.open()
+        bodyForReceiver.forceReopenDrain()
         let receiverDrain = Drain(bodyForReceiver.receiver) //must open because of reference semantics
         XCTAssert(data == receiverDrain.data, "Garbled receiver bytes")
 
 
         let senderDrain = Drain()
-        (bodyForReceiver.receiver as? Drain)?.open() //must open because of reference semantics
+        bodyForReceiver.forceReopenDrain()
         do {
             try bodyForSender.sender(senderDrain)
             XCTAssert(data == senderDrain.data, "Garbled sender bytes")
@@ -57,8 +57,10 @@ class BodyTests: XCTestCase {
 
 }
 
-extension Drain {
-    func open() {
-        self.closed = false
+extension Body {
+    mutating func forceReopenDrain() {
+        if let drain = self.receiver as? Drain {
+            drain.closed = false
+        }
     }
 }
