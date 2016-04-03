@@ -22,7 +22,7 @@ extension Request {
             uri: uri,
             version: Version(major: 1, minor: 1),
             headers: headers,
-            body: .stream(body)
+            body: .receiver(body)
         )
 
         self.headers["Transfer-Encoding"] = "chunked"
@@ -38,5 +38,17 @@ extension Request {
         )
 
         self.headers["Content-Length"] = HeaderValues(body.count.description)
+    }
+
+    public init(method: Method = .get, uri: URI = URI(path: "/"), headers: Headers = [:], body: Stream throws -> Void) {
+        self.init(
+            method: method,
+            uri: uri,
+            version: Version(major: 1, minor: 1),
+            headers: headers,
+            body: .sender(body)
+        )
+
+        self.headers["Transfer-Encoding"] = "chunked"
     }
 }
